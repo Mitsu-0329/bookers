@@ -6,11 +6,9 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      flash[:notice] = "投稿に成功しました。"
+      flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book.id)
     else
-      # flash.nowでフラッシュメッセージを定義する
-      flash.now[:notice] = "投稿に失敗しました。"
       @books = Book.all
       render :index
     end
@@ -32,6 +30,7 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
+      flash[:notice] = "You have updated book successfully."
       redirect_to book_path(@book.id)
     else
       @books = Book.all
